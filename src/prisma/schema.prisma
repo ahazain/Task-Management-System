@@ -27,8 +27,9 @@ model users {
 model task {  
   id        Int     @id @default(autoincrement())
   title     String
-  content   String
-  assigneeId    Int
+  deskripsi   String
+  urlFile  String
+  assigneeId    Int?
   assignee  users?    @relation("AssignedTasks",fields: [assigneeId], references: [id])
   createdById    Int
   created   users      @relation("CreatedTasks",fields: [createdById], references: [id])
