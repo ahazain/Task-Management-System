@@ -9,6 +9,8 @@ class Config {
   static publicKey = process.env.IMAGEKIT_PUBLIC_KEY;
   static privateKey = process.env.IMAGEKIT_PRIVATE_KEY;
   static urlEndpoint = process.env.IMAGEKIT_URL_ENDPOINT;
+  static email = process.env.EMAIL;
+  static password = process.env.PASSWORD;
 }
 
 module.exports = Config;

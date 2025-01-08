@@ -1,10 +1,15 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const imageKit = require("../utils/imageKit");
+const {
+  sendSuccesCreateTask,
+  sendSuccesTaskAssign,
+} = require("../utils/nodemailer");
 
 class TaskControllers {
   static async addTask(req, res) {
     const { title, deskripsi, createdById, assigneeId } = req.body;
+    console.log(req.file);
     if (!title || !deskripsi || !createdById) {
       return res.status(400).json({
         statusCode: 400,
@@ -38,6 +43,8 @@ class TaskControllers {
             : undefined,
         },
       });
+      sendSuccesCreateTask(createdById, task);
+      sendSuccesTaskAssign(assigneeId, task);
 
       res.status(201).json({
         statusCode: 201,
