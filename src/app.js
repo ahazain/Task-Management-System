@@ -10,7 +10,18 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/", auth);
 app.use("/", task);
+app.use((err, req, res, next) => {
+  console.error(err); 
+  const statusCode = err.statusCode || 500; 
+  const status = err.status || "Error"; 
+  const message = err.message || "Internal Server Error";
 
+  res.status(statusCode).json({
+    statusCode,
+    status,
+    message,
+  });
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
